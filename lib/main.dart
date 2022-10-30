@@ -13,7 +13,8 @@ class App extends StatelessWidget {
       home: HomePage(),
       theme: ThemeData(primarySwatch: Colors.grey),
       themeMode: ThemeMode.dark,
-      darkTheme: ThemeData(brightness:Brightness.dark,primarySwatch: Colors.red),
+      darkTheme:
+          ThemeData(brightness: Brightness.dark, primarySwatch: Colors.red),
     );
   }
 }
@@ -31,10 +32,8 @@ class _HomePageState extends State<HomePage> {
   }
 
   //comment type name=value;
-  List<String> todos = [
-   
-  ];
-    TextEditingController todoController = TextEditingController();
+  List<String> todos = [];
+  TextEditingController todoController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -64,14 +63,13 @@ class _HomePageState extends State<HomePage> {
               itemBuilder: (context, index) {
                 return ListTile(
                   title: Text(todos[index]),
-                  leading: Text((index+1).toString()),
+                  leading: Text((index + 1).toString()),
                   trailing: IconButton(
                     icon: Icon(Icons.delete),
                     onPressed: () {
                       setState(() {
                         todos.remove(todos[index]);
                       });
-                      
                     },
                   ),
                 );
@@ -80,24 +78,32 @@ class _HomePageState extends State<HomePage> {
           ),
           SizedBox(
             height: 50,
-            child: Row(children: [
-              Flexible(
-                child:TextField(
-                  decoration: InputDecoration(
-                    hintText: "Enter a Todo"
+            child: Row(
+              children: [
+                Flexible(
+                  child: TextField(
+                    decoration: InputDecoration(hintText: "Enter a Todo"),
+                    controller: todoController,
                   ),
-                  controller: todoController ,
-                ) ,
-              ),
-              ElevatedButton(onPressed: (){
-                if(todoController.text.isNotEmpty){
-                  setState(() {
-                    todos.add(todoController.text);
-                  });
-                  todoController.clear();
-                }
-              }, child: Text("Add"))
-            ],),
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    if (todoController.text.isNotEmpty) {
+                      setState(() {
+                        todos.add(todoController.text);
+                      });
+                      todoController.clear();
+                    }
+                  },
+                  child: Text("Add"),
+                  style: ElevatedButton.styleFrom(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(40),
+                    ),
+                  ),
+                )
+              ],
+            ),
           )
         ],
       ),
